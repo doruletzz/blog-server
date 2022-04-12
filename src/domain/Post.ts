@@ -25,5 +25,8 @@ export class Post {
     user?: string;
 
     @Property({type: 'text'})
-    content?: string;
+    content!: string;
+
+    @Property({type: 'string'})
+    imageUrl?: string;
 }

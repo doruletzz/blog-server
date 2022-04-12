@@ -23,15 +23,18 @@ export const DI = {} as {
 export const app = express();
 
 export const init = (async () => {
+    
     DI.orm = await MikroORM.init(mikroConfig);
-    // await DI.orm.getMigrator().up();
+    await DI.orm.getMigrator().up();
 
     DI.em = DI.orm.em;
     DI.postRepository = DI.orm.em.getRepository(Post);
 
     const generator = DI.orm.getSchemaGenerator();
-    await generator.updateSchema();
+    const cors = require('cors');
 
+    await generator.updateSchema();
+    app.use(cors());
     app.use(express.json());
     app.use((_req, _res, next) => RequestContext.create(DI.orm.em, next));
     app.get('/', (_req, res) => res.json({ message: 'Welcome to MikroORM express TS example, try CRUD on /author and /book endpoints!' }));

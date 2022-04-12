@@ -6,25 +6,32 @@ import { DI } from '../index';
 
 const router = Router();
 
+router.get('/:slug', async (req: Request, res: Response) => {
+  const posts = await DI.postRepository.findOne({
+    slug: req.params.slug
+  });
+  res.json(posts);
+});
+
 router.get('/', async (_req: Request, res: Response) => {
-    const books = await DI.postRepository.findAll({
+    const posts = await DI.postRepository.findAll({
       orderBy: { title: QueryOrder.DESC },
       limit: 20,
     });
-    res.json(books);
+    res.json(posts);
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    if (!req.body.name || !req.body.email) {
+    if (!req.body.id || !req.body.slug || !req.body.title) {
       res.status(400);
-      return res.json({ message: 'One of `name, email` is missing' });
+      return res.json({ message: 'One of `id, slug or title` is missing' });
     }
   
     try {
-      const author = DI.postRepository.create(req.body);
-      await DI.postRepository.persist(author).flush();
+      const post = DI.postRepository.create(req.body);
+      await DI.postRepository.persist(post).flush();
   
-      res.json(author);
+      res.json(post);
     } catch (e: any) {
       return res.status(400).json({ message: e.message });
     }
