@@ -22,7 +22,9 @@ router.get('/', async (_req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    if (!req.body.id || !req.body.slug || !req.body.title) {
+  console.log(req);
+
+    if (!req.body.slug || !req.body.title) {
       res.status(400);
       return res.json({ message: 'One of `id, slug or title` is missing' });
     }
