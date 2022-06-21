@@ -7,6 +7,9 @@ for usage create .env file with:
 ```
 MYSQL_USER=USER
 MYSQL_PASS=PASS
+MYSQL_URL=localhost 
+PORT=8080
+NODE_ENV=PRODUCTION
 ```
 
 workflow:

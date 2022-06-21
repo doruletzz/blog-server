@@ -23,6 +23,8 @@ export const DI = {} as {
 export const app = express();
 
 export const init = (async () => {
+
+    console.log(mikroConfig.user, mikroConfig.password, mikroConfig.host)
     
     DI.orm = await MikroORM.init(mikroConfig);
     await DI.orm.getMigrator().up();
