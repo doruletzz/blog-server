@@ -18,21 +18,21 @@ router.get(
   "/",
   async (
     req: Request<
+      { tag: Array<Tag> },
       {},
       {},
-      {},
-      { tags: Array<Tag>; page: number; pageSize: number }
+      { page: number; pageSize: number }
     >,
     res: Response
   ) => {
-    console.log(req.query.tags);
+    console.log(req.query.tag);
     const page = req.query.page ? req.query.page : 1;
     const pageSize = req.query.pageSize ? req.query.pageSize : 10;
 
     console.log(req.query, page, pageSize);
 
     const posts = await DI.postRepository.find(
-      { tags: req.query.tags },
+      { tags: req.params.tag },
       {
         orderBy: { createdAt: QueryOrder.DESC },
         limit: pageSize,
