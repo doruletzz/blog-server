@@ -4,7 +4,7 @@ import { Post } from './domain';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 import path from 'path';
-import { PASS, URL, USER } from './constants';
+import { DB_NAME, PASS, URL, USER } from './constants';
 
 const config: Options = {
     migrations: {
@@ -13,7 +13,7 @@ const config: Options = {
     },
     entities: [Post],
     allowGlobalContext: true,
-    dbName: 'dorletz',
+    dbName: DB_NAME,
     type: 'mysql',
     metadataProvider: TsMorphMetadataProvider,
     highlighter: new SqlHighlighter(),

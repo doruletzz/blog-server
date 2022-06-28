@@ -1,10 +1,19 @@
 import {
-  ArrayType,
   Entity,
   EnumArrayType,
   PrimaryKey,
   Property,
 } from "@mikro-orm/core";
+
+
+export enum Tag {
+  programming,
+  blog,
+  design,
+  react,
+  books,
+}
+
 
 @Entity()
 export class Post {
@@ -37,12 +46,4 @@ export class Post {
 
   @Property({ type: "string" })
   imageUrl?: string;
-}
-
-export enum Tag {
-  programming,
-  blog,
-  design,
-  react,
-  books,
 }

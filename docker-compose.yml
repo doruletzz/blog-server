@@ -1,0 +1,29 @@
+version: "3.3"
+services:
+  backend:
+    build: . # Build image from local Dockerfile
+    environment:
+      MYSQL_HOST:     db
+      MYSQL_PORT:     "${MYSQL_PORT}"
+      MYSQL_USER:     "${MYSQL_USER}"
+      MYSQL_PASS: "${MYSQL_PASS}"
+      MYSQL_DB:     "${MYSQL_DB}"
+    ports:
+      - "4000:4000" # Expose port 4000 on host
+    depends_on:
+      - db # Wait until database service is loaded
+    networks:
+      - app-network
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASS}"
+      MYSQL_DATABASE: "${MYSQL_DB}"
+      MYSQL_USER:     "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASS}"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
