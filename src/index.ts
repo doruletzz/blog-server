@@ -42,7 +42,8 @@ export const init = (async () => {
     app.use('/post/', PostController);
     app.use((_res, res) => res.status(404).json({ message: 'No route found' }));
 
-    DI.server = app.listen(PORT, () => {
+    console.log(PORT)
+    DI.server = app.listen(PORT ? PORT : 4000, () => {
         console.log(`MikroORM express TS example started at http://localhost:${PORT}`);
     });
 });
