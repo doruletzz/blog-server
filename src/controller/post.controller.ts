@@ -110,6 +110,8 @@ router.put('/:id', async (req: Request, res: Response) => {
 		post.content = req.body.content;
 		post.summary = req.body.summary;
 		post.createdAt = new Date(req.body.createdAt);
+		console.log(req.body.createdAt, new Date(req.body.createdAt));
+		post.imageUrl = req.body.imageUrl;
 		post.updatedAt = new Date();
 
 		console.log(post, req.body);

@@ -17,7 +17,7 @@ export class Post {
 	createdAt? = new Date();
 
 	@Property({ type: 'date', onUpdate: () => new Date() })
-	updatedAt? = new Date();
+	updatedAt?: Date;
 
 	@Property({ type: 'string', unique: true })
 	slug!: string;
